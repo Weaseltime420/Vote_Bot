@@ -5,6 +5,7 @@ Simple “rough and ready” Discord bot for **blind voting** using **slash comm
 ## What it does
 
 - **/setvote (admin)**: sets vote options (minimum 2; up to 10) and **clears existing votes**
+- **/showpoll (public)**: shows the available vote options (no vote counts)
 - **/vote (public)**: accepts an integer choice; stores `(discord_user_id, choice)`; prevents double-voting
 - **/clearvotes (admin)**: clears all votes (keeps the current vote options)
 - **/checkvote (admin)**: shows current vote standings (**ephemeral**)

@@ -167,6 +167,20 @@ async def publishvote(interaction: discord.Interaction) -> None:
     await interaction.response.send_message(msg, ephemeral=False)
 
 
+@bot.tree.command(name="showpoll", description="Show the available vote options.")
+async def showpoll(interaction: discord.Interaction) -> None:
+    await vote_db.init_db(_db_path())
+    options = await vote_db.list_vote_options(_db_path())
+    if not options:
+        await interaction.response.send_message(
+            "No vote options have been set yet. An admin must run `/setvote` first."
+        )
+        return
+
+    rendered = "\n".join([f"{i}. {label}" for i, label in options])
+    await interaction.response.send_message(f"Vote options:\n\n{rendered}", ephemeral=False)
+
+
 @bot.tree.error
 async def on_app_command_error(
     interaction: discord.Interaction, error: app_commands.AppCommandError
